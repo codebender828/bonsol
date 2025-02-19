@@ -2,7 +2,10 @@
 name = "bonsol-cli"
 version.workspace = true
 edition = "2021"
-publish = false          # Exclude local crates from licensing checks
+description = "command line interface for Bonsol"
+authors = ["anagram build team"]
+repository = "https://github.com/anagrambuild/bonsol"
+license = "MIT"
 
 [[bin]]
 name = "bonsol"

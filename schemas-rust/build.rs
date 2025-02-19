@@ -20,10 +20,16 @@ fn main() {
     } else {
         panic!("flatc not found. Please install flatc version {}.", FLATC_VERSION);
     }
+
     // Define schema directory and target directory for generated Rust code.
-    let schema_dir = Path::new("../schemas");
     let generated_src =
         PathBuf::from(env::var("GENERATED_CODE_DIR").unwrap_or_else(|_| "src".to_string()));
+
+
+    let mut schema_dir = Path::new("../schemas");
+    if env::var("CARGO_MANIFEST_DIR").unwrap().contains(format!("target/package/{}-{}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION")).as_str()) {
+        schema_dir = Path::new("../../../schemas");
+    }
 
     // Collect all .fbs files in the schema directory.
     let file_list: Vec<_> = fs::read_dir(schema_dir)
